@@ -30,6 +30,18 @@ const resolvers = {
         const token = signToken(user); 
         return { token, user };
       },
+    
+    signup: async (parent, { username, email, password }) => {
+      try {
+        const user = await User.create({ username, email, password });
+        const token = signToken(user);
+
+        return { token, user };
+      } catch (error) {
+        console.error(error);
+        throw new AuthenticationError('Signup failed');
+      }
+    },
   
     addExpense: async (parent, { input }, context) => {
       if (context.user) {
