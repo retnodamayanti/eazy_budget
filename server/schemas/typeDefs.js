@@ -1,7 +1,7 @@
-const { gql } = require('apollo-server-express'); 
+const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-type Expense {
+  type Expense {
     _id: ID!
     description: String!
     amount: Float!
@@ -24,7 +24,20 @@ type Expense {
     addExpense(input: ExpenseInput!): Expense
     updateExpense(expenseId: ID!, input: ExpenseInput!): Expense
     removeExpense(expenseId: ID!): Expense
+    login(email: String!, password: String!): Auth  # Add this line for the login mutation
   }
-  `;
   
-  module.exports = typeDefs;
+  type Auth {
+    token: String
+    user: User
+  }
+  
+  type User {
+    _id: ID!
+    username: String!
+    email: String!
+    savedExpenses: [Expense]
+  }
+`;
+
+module.exports = typeDefs;
