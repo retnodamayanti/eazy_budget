@@ -21,11 +21,12 @@ const typeDefs = gql`
   }
   
   type Mutation {
+    signup(username: String!, email: String!, password: String!): Auth
     addExpense(input: ExpenseInput!): Expense
     updateExpense(expenseId: ID!, input: ExpenseInput!): Expense
     removeExpense(expenseId: ID!): Expense
-    login(email: String!, password: String!): Auth  # Add this line for the login mutation
-  }
+    login(email: String!, password: String!): Auth
+  }  
   
   type Auth {
     token: String
