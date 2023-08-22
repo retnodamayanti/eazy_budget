@@ -1,6 +1,7 @@
 const express = require('express');
 const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
+const { signToken, getUserFromToken } = require('./utils/auth');
 
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
@@ -10,6 +11,19 @@ const app = express();
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+  context: ({ req }) => {
+    // Get the token from the headers
+    const token = req.headers.authorization?.split('Bearer ')[1];
+
+    // If there's no token, return an empty context
+    if (!token) {
+      return {};
+    }
+
+    // If there's a token, verify it and attach the user to the context
+    const user = getUserFromToken(token);
+    return { user };
+  }
 });
 
 app.use(express.urlencoded({ extended: false }));
