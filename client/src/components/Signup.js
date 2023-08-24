@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { SIGNUP } from '../utils/mutations';
-import { useHistory } from 'react-router-dom'; // Import useHistory
+import { useNavigate } from 'react-router-dom'; 
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [username, setUsername] = useState(''); // Added username state
+  const [username, setUsername] = useState(''); 
 
   const [signupMutation, { loading, error }] = useMutation(SIGNUP);
-  const history = useHistory(); // Use the useHistory hook
+  const navigate = useNavigate(); 
 
   const handleSignup = async () => {
     try {
       await signupMutation({ variables: { username, email, password } });
-      history.push('/login'); // Redirect to login page after successful signup
+      navigate('/'); 
     } catch (error) {
       console.error("Error during signup:", error);
     }
@@ -25,7 +25,6 @@ const Signup = () => {
       <h2>Signup</h2>
       {error && <p>Error: {error.message}</p>}
       <form>
-        {/* Added input for username */}
         <div>
           <label>Username:</label>
           <input
