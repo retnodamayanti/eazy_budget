@@ -8,7 +8,10 @@ const ExpenseList = () => {
   const handleAddExpense = useHandleAddExpense();
   const handleUpdateExpense = useHandleUpdateExpense();
   const handleRemoveExpense = useHandleRemoveExpense();
-  const { loading, error, data } = useQuery(GET_EXPENSES);
+  const { loading, error, data } = useQuery(GET_EXPENSES, {
+    fetchPolicy: "network-only"
+  });
+  
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
