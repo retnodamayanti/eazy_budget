@@ -1,10 +1,11 @@
 import React from 'react';
+import ExpenseList from './ExpenseList.js';
 
-const Dashboard = ({ onLogout }) => {
+const Dashboard = ({ user }) => {
   return (
-    <div>
-      <h2>Welcome to the Dashboard</h2>
-      <button onClick={onLogout}>Logout</button>
+    <div className="dashboard">
+      <h2>Welcome, {user?.username || 'Guest'}!</h2>
+      <ExpenseList />
     </div>
   );
 };
