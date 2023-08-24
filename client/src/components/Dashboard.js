@@ -15,11 +15,15 @@ const Dashboard = ({ user }) => {
 
   const expenses = data.expenses;
   const totalExpense = expenses.reduce((acc, expense) => acc + expense.amount, 0);
+  const totalIncome = 500;
+  const balance = totalIncome - totalExpense;
 
   return (
     <div className="dashboard">
       <h2>Welcome, {user?.username || 'Guest'}!</h2>
+      <h3>Total Income: ${totalIncome}</h3>
       <h3>Total Expense: ${totalExpense}</h3>
+      <h3>Balance: ${balance}</h3> 
       <ExpenseList expenses={expenses} />
     </div>
   );
