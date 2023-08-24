@@ -22,6 +22,7 @@ const server = new ApolloServer({
 
     // If there's a token, verify it and attach the user to the context
     const user = getUserFromToken(token);
+    console.log("Logged in user ID:", user._id);
     return { user };
   }
 });
