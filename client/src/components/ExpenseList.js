@@ -1,8 +1,13 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_EXPENSES } from '../utils/queries'; 
+import { useHandleAddExpense, useHandleUpdateExpense, useHandleRemoveExpense } from '../utils/expenseHandlers';
+
 
 const ExpenseList = () => {
+  const handleAddExpense = useHandleAddExpense();
+  const handleUpdateExpense = useHandleUpdateExpense();
+  const handleRemoveExpense = useHandleRemoveExpense();
   const { loading, error, data } = useQuery(GET_EXPENSES);
 
   if (loading) return <p>Loading...</p>;
