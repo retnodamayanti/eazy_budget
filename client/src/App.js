@@ -1,30 +1,20 @@
 import React, { useState } from 'react';
-import { ApolloProvider } from '@apollo/client';
-import ApolloClient from './utils/ApolloClient'; 
-import Auth from './components/Auth';
-import Dashboard from './components/Dashboard'; 
+import { Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
-const App = () => {
-  const [token, setToken] = useState(localStorage.getItem('token') || '');
-
-  const handleLogout = () => {
-    localStorage.removeItem('token');
-    setToken('');
-  };
+function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
+  const [user, setUser] = useState(null); // Store the user data
 
   return (
-    <ApolloProvider client={ApolloClient}>
-      <div>
-        {token ? (
-          <>
-            <Dashboard onLogout={handleLogout} />
-          </>
-        ) : (
-          <Auth />
-        )}
-      </div>
-    </ApolloProvider>
+    <div className="App">
+      <Routes>
+        <Route path="/" element={<Login setLoggedIn={setLoggedIn} setUser={setUser} />} />
+        <Route path="/dashboard" element={loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />} />
+      </Routes>
+    </div>
   );
-};
+}
 
 export default App;
