@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../utils/mutations';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = ({ setLoggedIn, setUser }) => {
   const [email, setEmail] = useState('');
@@ -53,6 +54,9 @@ const Login = ({ setLoggedIn, setUser }) => {
         />
         <button type="submit">Login</button>
       </form>
+      <div className="signup-link">
+        Doesn't have an account? <Link to="/signup">Sign Up</Link>
+      </div>
     </div>
   );
 };
