@@ -17,16 +17,18 @@ const ExpenseForm = ({ mode, initialExpense, onSubmit, onClose }) => {
     }
   }, [mode, initialExpense]);
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
     e.preventDefault();
+    const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     onSubmit({
       description,
       amount: Number(amount),
       category,
-      date: date.toISOString()
+      date: formattedDate
     });
     onClose();
-  };
+};
+
 
   return (
     <form onSubmit={handleSubmit}>
