@@ -5,6 +5,8 @@ import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
 import ExpenseManager from './components/ExpenseManager';
 import Signup from './components/Signup';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import './global.css';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
