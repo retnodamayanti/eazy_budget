@@ -21,40 +21,51 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <h2>Signup</h2>
-      {error && <p>Error: {error.message}</p>}
-      <form>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
+    <div className="container mt-5">
+      <div className="row justify-content-center">
+        <div className="col-md-6">
+          <div className="card p-4">
+            <h2 className="text-center mb-4">Signup</h2>
+            {error && <p className="text-danger text-center">Error: {error.message}</p>}
+            <form>
+              <div className="mb-3">
+                <label className="form-label">Username:</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Email:</label>
+                <input
+                  type="email"
+                  className="form-control"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div className="mb-3">
+                <label className="form-label">Password:</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div className="d-grid">
+                <button type="button" onClick={handleSignup} disabled={loading} className="btn btn-primary">
+                  {loading ? 'Signing up...' : 'Signup'}
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
-        <div>
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="button" onClick={handleSignup} disabled={loading}>
-          {loading ? 'Signing up...' : 'Signup'}
-        </button>
-      </form>
+      </div>
     </div>
-  );
+  );  
 };
 
 export default Signup;
