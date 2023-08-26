@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard';
 import NavBar from './components/NavBar';
 import ExpenseManager from './components/ExpenseManager';
 import Signup from './components/Signup';
+import Footer from './components/Footer';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './global.css';
 
@@ -27,6 +28,7 @@ function App() {
         <Route path="/expense" element={loggedIn ? <ExpenseManager /> : <Navigate to="/" />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
+      <Footer />
     </div>
   );
 }
