@@ -30,35 +30,60 @@ const handleSubmit = (e) => {
 };
 
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <input
-        type="text"
-        placeholder="Description"
-        value={description}
-        onChange={(e) => setDescription(e.target.value)}
-      />
-      <input
-        type="number"
-        placeholder="Amount"
-        value={amount}
-        onChange={(e) => setAmount(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Category"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
-      />
-      <DatePicker 
-        selected={date} 
-        onChange={date => setDate(date)} 
-        dateFormat="yyyy-MM-dd"
-      />
-      <button type="submit">{mode === 'add' ? 'Add' : 'Update'} Expense</button>
-      <button type="button" onClick={onClose}>Cancel</button>
+return (
+  <div className="container px-5">
+    <form onSubmit={handleSubmit} className="bg-light p-4 rounded">
+      <div className="mb-3">
+        <label className="form-label">Description</label>
+        <input
+          type="text"
+          className="form-control"
+          placeholder="Description"
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Amount</label>
+        <input
+          type="number"
+          className="form-control"
+          placeholder="Amount"
+          value={amount}
+          onChange={(e) => setAmount(e.target.value)}
+        />
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Category</label>
+        <select 
+          className="form-control" 
+          value={category} 
+          onChange={(e) => setCategory(e.target.value)}
+        >
+          <option value="" disabled>Select a category</option>
+          <option value="Food">Food</option>
+          <option value="Transportation">Transportation</option>
+          <option value="Entertainment">Entertainment</option>
+          <option value="Utilities">Utilities</option>
+  
+        </select>
+      </div>
+      <div className="mb-3">
+        <label className="form-label">Date</label>
+        <DatePicker 
+          className="form-control"
+          selected={date} 
+          onChange={date => setDate(date)} 
+          dateFormat="yyyy-MM-dd"
+        />
+      </div>
+      <div className="mt-3">
+        <button type="submit" className="btn btn-primary me-2">{mode === 'add' ? 'Add' : 'Update'} Expense</button>
+        <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      </div>
     </form>
-  );
+  </div>
+);
 };
 
 export default ExpenseForm;
