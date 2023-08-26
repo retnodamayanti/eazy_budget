@@ -7,18 +7,34 @@ const ExpenseForm = ({ mode, initialExpense, onSubmit, onClose }) => {
   const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState(new Date());
-
+  const [errorMessage, setErrorMessage] = useState(''); // New state for error message
 
   useEffect(() => {
     if (mode === 'update' && initialExpense) {
       setDescription(initialExpense.description);
       setAmount(initialExpense.amount);
       setCategory(initialExpense.category);
+      setDate(new Date(initialExpense.date));
     }
   }, [mode, initialExpense]);
 
-const handleSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
+
+    // Validation checks
+    if (!description.trim()) {
+      setErrorMessage('Description is required.');
+      return;
+    }
+    if (!amount || amount <= 0) {
+      setErrorMessage('Amount is required and must be a positive value.');
+      return;
+    }
+    if (!category) {
+      setErrorMessage('Category is required.');
+      return;
+    }
+
     const formattedDate = `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, '0')}-${String(date.getDate()).padStart(2, '0')}`;
     onSubmit({
       description,
@@ -27,12 +43,13 @@ const handleSubmit = (e) => {
       date: formattedDate
     });
     onClose();
-};
+  };
 
 
 return (
   <div className="container px-5">
     <form onSubmit={handleSubmit} className="bg-light p-4 rounded">
+    {errorMessage && <div className="alert alert-danger">{errorMessage}</div>} 
       <div className="mb-3">
         <label className="form-label">Description</label>
         <input
@@ -46,15 +63,21 @@ return (
       <div className="mb-3">
         <label className="form-label">Amount</label>
         <input
-          type="text"
+          type="number"
           className="form-control"
           placeholder="Amount"
           value={amount}
-          onChange={(e) => setAmount(e.target.value)}
-          pattern="\d+(\.\d{0,2})?"  
-          title="Please enter a valid amount"
+          onChange={(e) => {
+            if (e.target.value >= 0 || e.target.value === '') {
+              setAmount(e.target.value);
+            }
+          }}
+          onWheel={(e) => e.preventDefault()}
+          min="0"
+          title="Please enter a valid positive amount"
         />
       </div>
+
       <div className="mb-3">
         <label className="form-label">Category</label>
         <select 
@@ -78,6 +101,7 @@ return (
           selected={date} 
           onChange={date => setDate(date)} 
           dateFormat="yyyy-MM-dd"
+          maxDate={new Date()}
         />
       </div>
       <div className="mt-3">
