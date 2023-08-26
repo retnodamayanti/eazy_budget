@@ -1,9 +1,16 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-// Replace with your GraphQL server URL
+// Determine if the environment is production
+const isProduction = process.env.NODE_ENV === 'production';
+
+// Set the GraphQL URL based on the environment
+const GRAPHQL_URL = isProduction ? 
+  '/graphql' : // Use a relative path for production
+  'http://localhost:3001/graphql'; // Use localhost for development
+
 const httpLink = createHttpLink({
-  uri: 'http://localhost:3001/graphql', // Your GraphQL server URL
+  uri: GRAPHQL_URL,
 });
 
 // Set up authorization header
