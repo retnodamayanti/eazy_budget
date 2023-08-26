@@ -52,6 +52,7 @@ const ExpenseList = () => {
   return (
     <div className="expense-list container px-5">
       <h3 className="display-4 lh-1 mb-4">Expense List</h3>
+      <button className="btn btn-primary mt-4" onClick={showAddForm}>Add Expense</button>
       {isFormVisible && (
         <div className="bg-light p-4 rounded">
           <h4 className="fw-bold">{formMode === 'add' ? 'Add Expense' : 'Update Expense'}</h4>
@@ -77,7 +78,6 @@ const ExpenseList = () => {
           </li>
         ))}
       </ul>
-      <button className="btn btn-primary mt-4" onClick={showAddForm}>Add Expense</button>
     </div>
   );
 };
