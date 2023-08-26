@@ -2,9 +2,6 @@ import React from 'react';
 import ExpenseList from './ExpenseList.js';
 import { useQuery } from '@apollo/client';
 import { GET_EXPENSES } from '../utils/queries';
-// import './Dashboard.css';
-
-
 
 const Dashboard = ({ user }) => {
   const { loading, error, data } = useQuery(GET_EXPENSES, {
@@ -44,12 +41,13 @@ const Dashboard = ({ user }) => {
         </div>
         <div className="col-md-4">
           <div className="card bg-light">
-            <div className="card-body">
-              <h4 className="card-title">Balance</h4>
-              <p className="card-text">${balance}</p>
-            </div>
+              <div className="card-body">
+                  <h4 className="card-title">Balance</h4>
+                  <p className={`card-text ${balance === 0 ? 'red-text' : ''}`}>${balance}</p>
+              </div>
           </div>
         </div>
+
       </div>
       <ExpenseList expenses={expenses} />
     </div>
