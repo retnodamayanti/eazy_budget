@@ -51,8 +51,9 @@ const ExpenseList = () => {
 
   return (
     <div className="expense-list container px-5">
-      <h3 className="display-4 lh-1 mb-4">Expense List</h3>
-      <button className="btn btn-primary mt-4" onClick={showAddForm}>Add Expense</button>
+      <div className="d-flex justify-content-center align-items-center">
+          <button className="btn btn-grad-add mt-4" onClick={showAddForm}>Add Expense</button>
+      </div>
       {isFormVisible && (
         <div className="bg-light p-4 rounded">
           <h4 className="fw-bold">{formMode === 'add' ? 'Add Expense' : 'Update Expense'}</h4>
@@ -64,22 +65,34 @@ const ExpenseList = () => {
           />
         </div>
       )}
+      <h3 className="display-4 lh-1 mb-4 mt-4">Expense List</h3>
       <ul className="list-group mt-4">
-        {expenses.map(expense => (
-          <li key={expense._id} className="list-group-item">
-            <div><strong>Description:</strong> {expense.description}</div>
-            <div><strong>Amount:</strong> ${expense.amount}</div>
-            <div><strong>Category:</strong> {expense.category}</div>
-            <div><strong>Date:</strong> {expense.date}</div>
-            <div className="expense-buttons mt-2">
-              <button className="btn btn-warning btn-sm me-2" onClick={() => showUpdateForm(expense)}>Update</button>
-              <button className="btn btn-danger btn-sm" onClick={() => handleRemoveExpense(expense._id)}>Remove</button>
-            </div>
-          </li>
-        ))}
-      </ul>
+    {expenses.length === 0 ? (
+        <li className="list-group-item py-3 text-center">
+            You don't have any expenses.
+        </li>
+    ) : (
+        expenses.map(expense => (
+            <li key={expense._id} className="list-group-item py-3 hover-effect">
+                <div className="row">
+                    <div className="col-md-9">
+                        <div><strong>Description:</strong> {expense.description}</div>
+                        <div><strong>Amount:</strong> ${expense.amount}</div>
+                        <div><strong>Category:</strong> {expense.category}</div>
+                        <div><strong>Date:</strong> {expense.date}</div>
+                    </div>
+                    <div className="col-md-3 d-flex flex-column flex-md-row align-items-start align-items-md-center justify-content-end">
+                        <button className="btn btn-grad btn-sm" onClick={() => showUpdateForm(expense)}>Update</button>
+                        <button className="btn btn-grad btn-sm" onClick={() => handleRemoveExpense(expense._id)}>Remove</button>
+                    </div>
+                </div>
+            </li>
+        ))
+    )}
+</ul>
     </div>
   );
+  
 };
 
 export default ExpenseList;

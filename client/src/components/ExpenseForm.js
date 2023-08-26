@@ -104,10 +104,14 @@ return (
           maxDate={new Date()}
         />
       </div>
-      <div className="mt-3">
-        <button type="submit" className="btn btn-primary me-2">{mode === 'add' ? 'Add' : 'Update'} Expense</button>
-        <button type="button" className="btn btn-secondary" onClick={onClose}>Cancel</button>
+      <div className="mt-3 d-flex flex-column flex-md-row justify-content-center align-items-center">
+        <button type="submit" className="btn btn-grad mb-2 mb-md-0 me-md-2 flex-fill">{mode === 'add' ? 'Add' : 'Update'}</button>
+        <button type="button" className="btn btn-grad flex-fill" onClick={onClose}>Cancel</button>
       </div>
+
+
+
+
     </form>
   </div>
 );
