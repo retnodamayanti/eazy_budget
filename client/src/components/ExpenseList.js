@@ -50,11 +50,11 @@ const ExpenseList = () => {
   };
 
   return (
-    <div className="expense-list">
-      <h3>Expense List</h3>
+    <div className="expense-list container px-5">
+      <h3 className="display-4 lh-1 mb-4">Expense List</h3>
       {isFormVisible && (
-        <div>
-          <h4>{formMode === 'add' ? 'Add Expense' : 'Update Expense'}</h4>
+        <div className="bg-light p-4 rounded">
+          <h4 className="fw-bold">{formMode === 'add' ? 'Add Expense' : 'Update Expense'}</h4>
           <ExpenseForm
             mode={formMode}
             initialExpense={currentExpense}
@@ -63,21 +63,21 @@ const ExpenseList = () => {
           />
         </div>
       )}
-      <ul>
+      <ul className="list-group mt-4">
         {expenses.map(expense => (
-          <li key={expense._id}>
-            <div>Description: {expense.description}</div>
-            <div>Amount: {expense.amount}</div>
-            <div>Category: {expense.category}</div>
-            <div>Date: {expense.date}</div>
-            <div className="expense-buttons">
-              <button onClick={() => showUpdateForm(expense)}>Update</button>
-              <button onClick={() => handleRemoveExpense(expense._id)}>Remove</button>
+          <li key={expense._id} className="list-group-item">
+            <div><strong>Description:</strong> {expense.description}</div>
+            <div><strong>Amount:</strong> ${expense.amount}</div>
+            <div><strong>Category:</strong> {expense.category}</div>
+            <div><strong>Date:</strong> {expense.date}</div>
+            <div className="expense-buttons mt-2">
+              <button className="btn btn-warning btn-sm me-2" onClick={() => showUpdateForm(expense)}>Update</button>
+              <button className="btn btn-danger btn-sm" onClick={() => handleRemoveExpense(expense._id)}>Remove</button>
             </div>
           </li>
         ))}
       </ul>
-      <button onClick={showAddForm}>Add Expense</button>
+      <button className="btn btn-primary mt-4" onClick={showAddForm}>Add Expense</button>
     </div>
   );
 };
