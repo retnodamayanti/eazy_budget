@@ -46,11 +46,13 @@ return (
       <div className="mb-3">
         <label className="form-label">Amount</label>
         <input
-          type="number"
+          type="text"
           className="form-control"
           placeholder="Amount"
           value={amount}
           onChange={(e) => setAmount(e.target.value)}
+          pattern="\d+(\.\d{0,2})?"  
+          title="Please enter a valid amount"
         />
       </div>
       <div className="mb-3">
@@ -65,6 +67,7 @@ return (
           <option value="Transportation">Transportation</option>
           <option value="Entertainment">Entertainment</option>
           <option value="Utilities">Utilities</option>
+          <option value="Other">Other</option>
   
         </select>
       </div>
