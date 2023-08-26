@@ -2,6 +2,8 @@ import React from 'react';
 import ExpenseList from './ExpenseList.js';
 import { useQuery } from '@apollo/client';
 import { GET_EXPENSES } from '../utils/queries';
+// import './Dashboard.css';
+
 
 
 const Dashboard = ({ user }) => {
@@ -19,11 +21,36 @@ const Dashboard = ({ user }) => {
   const balance = totalIncome - totalExpense;
 
   return (
-    <div className="dashboard">
-      <h2>Welcome, {user?.username || 'Guest'}!</h2>
-      <h3>Total Income: ${totalIncome}</h3>
-      <h3>Total Expense: ${totalExpense}</h3>
-      <h3>Balance: ${balance}</h3> 
+    <div className="dashboard container mt-5">
+      <div className="text-center mb-4">
+        <h2>Welcome, {user?.username || 'Guest'}!</h2>
+      </div>
+      <div className="row mb-4">
+        <div className="col-md-4">
+          <div className="card bg-light">
+            <div className="card-body">
+              <h4 className="card-title">Total Income</h4>
+              <p className="card-text">${totalIncome}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card bg-light">
+            <div className="card-body">
+              <h4 className="card-title">Total Expense</h4>
+              <p className="card-text">${totalExpense}</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card bg-light">
+            <div className="card-body">
+              <h4 className="card-title">Balance</h4>
+              <p className="card-text">${balance}</p>
+            </div>
+          </div>
+        </div>
+      </div>
       <ExpenseList expenses={expenses} />
     </div>
   );
