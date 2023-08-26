@@ -23,7 +23,7 @@ const Login = ({ setLoggedIn, setUser }) => {
     e.preventDefault(); // Prevent default form submission behavior
     console.log("handleLogin function called"); // Log at the beginning
 
-    console.log("Attempting to log in with:", email, password);
+    console.log("Attempting to log in with:", email);
     
     loginMutation({ variables: { email, password } })
       .then(response => {
