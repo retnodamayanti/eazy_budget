@@ -4,7 +4,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 const ExpenseForm = ({ mode, initialExpense, onSubmit, onClose }) => {
   const [description, setDescription] = useState('');
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState('');
   const [category, setCategory] = useState('');
   const [date, setDate] = useState(new Date());
 
