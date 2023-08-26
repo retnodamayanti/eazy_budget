@@ -20,14 +20,16 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <div className="flex-container">
       {loggedIn && <NavBar onLogout={handleLogout} />}
-      <Routes>
-        <Route path="/" element={<Login setLoggedIn={setLoggedIn} setUser={setUser} />} />
-        <Route path="/dashboard" element={loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />} />
-        <Route path="/expense" element={loggedIn ? <ExpenseManager /> : <Navigate to="/" />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<Login setLoggedIn={setLoggedIn} setUser={setUser} />} />
+          <Route path="/dashboard" element={loggedIn ? <Dashboard user={user} /> : <Navigate to="/" />} />
+          <Route path="/expense" element={loggedIn ? <ExpenseManager /> : <Navigate to="/" />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

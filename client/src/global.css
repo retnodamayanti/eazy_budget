@@ -11067,6 +11067,9 @@ section.cta:before {
     max-width: 17rem;
   }
 }
+footer {
+  margin-top: 50px;
+}
 footer a {
   color: rgba(255, 255, 255, 0.5);
   text-decoration: none;
@@ -11120,10 +11123,21 @@ footer a:hover, footer a:active, footer a:focus {
   max-width: 10rem;
 }
 
-/* additional css */
+/* start of additional css */
 .red-text {
     color: red;
 }
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+}
+/* end of additional css */
 
 @media (min-width: 576px) {
   .masthead .masthead-device-mockup .circle {
