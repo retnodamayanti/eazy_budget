@@ -24,7 +24,7 @@ const Dashboard = ({ user }) => {
       </div>
       <div className="row mb-4">
         <div className="col-md-4">
-          <div className="card color-1">
+          <div className="card color-1 card-hover-effect">
             <div className="card-body">
               <h4 className="card-title white-text">Income</h4>
               <p className="card-text white-text">${totalIncome}</p>
@@ -32,7 +32,7 @@ const Dashboard = ({ user }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <div className="card color-2">
+          <div className="card color-2 card-hover-effect">
             <div className="card-body">
               <h4 className="card-title">Total Expense</h4>
               <p className="card-text">${totalExpense}</p>
@@ -40,14 +40,13 @@ const Dashboard = ({ user }) => {
           </div>
         </div>
         <div className="col-md-4">
-          <div className="card color-3">
+          <div className="card color-3 card-hover-effect">
               <div className="card-body">
                   <h4 className="card-title">Balance</h4>
                   <p className={`card-text ${balance <= 0 ? 'red-text' : ''}`}>${balance}</p>
               </div>
           </div>
         </div>
-
       </div>
       <ExpenseList expenses={expenses} />
     </div>
