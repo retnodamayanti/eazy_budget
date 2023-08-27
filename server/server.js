@@ -12,15 +12,15 @@ const server = new ApolloServer({
   typeDefs,
   resolvers,
   context: ({ req }) => {
-    // Get the token from the headers
+    // get the token from the headers
     const token = req.headers.authorization?.split('Bearer ')[1];
 
-    // If there's no token, return an empty context
+    // if there's no token, return an empty context
     if (!token) {
       return {};
     }
 
-    // If there's a token, verify it and attach the user to the context
+    // if there's a token, verify it and attach the user to the context
     const user = getUserFromToken(token);
     console.log("Logged in user ID:", user._id);
     return { user };
@@ -37,9 +37,12 @@ if (process.env.NODE_ENV === 'production') {
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
+// // catch-all route
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '../client/build/index.html'));
+// });
 
-
-// Create a new instance of an Apollo server with the GraphQL schema
+// create a new instance of an Apollo server with the GraphQL schema
 const startApolloServer = async () => {
   await server.start();
   server.applyMiddleware({ app });
@@ -52,6 +55,6 @@ const startApolloServer = async () => {
   })
   };
   
-// Call the async function to start the server
+// start the server
   startApolloServer();
  

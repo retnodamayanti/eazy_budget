@@ -10,11 +10,17 @@ const Signup = () => {
   const [emailTouched, setEmailTouched] = useState(false);
   const [passwordTouched, setPasswordTouched] = useState(false);
   const [usernameTouched, setUsernameTouched] = useState(false);
+  const [passwordError, setPasswordError] = useState('');
+
 
   const [signupMutation, { loading, error }] = useMutation(SIGNUP);
   const navigate = useNavigate(); 
 
   const handleSignup = async () => {
+    if (password.length < 6) {
+      setPasswordError('Password must be at least 6 characters long.');
+      return;
+    }
     try {
       await signupMutation({ variables: { username, email, password } });
       navigate('/'); 
@@ -59,10 +65,14 @@ const Signup = () => {
                   type="password"
                   className="form-control"
                   value={password}
-                  onChange={(e) => setPassword(e.target.value)}
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    setPasswordError(''); 
+                  }}
                   onBlur={() => setPasswordTouched(true)}
                 />
                 {passwordTouched && !password && <p className="text-danger">Password is required.</p>}
+                {passwordError && <p className="text-danger">{passwordError}</p>}
               </div>
               <div className="mb-3 text-center">
                 <Link to="/">Already have an account? Login</Link>
